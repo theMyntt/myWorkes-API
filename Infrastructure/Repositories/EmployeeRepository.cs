@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using myWorkes.Application.Services;
 using myWorkes.Core;
@@ -10,7 +11,7 @@ using myWorkes.Infrastructure.Schema;
 
 namespace myWorkes.Infrastructure.Repositories
 {
-    public class EmployeeRepository : IRepositoryService<EmployeeAggregate>
+    public class EmployeeRepository : Controller, IRepositoryService<EmployeeAggregate>
     {
         private readonly IMongoCollection<Employee>? _collection;
         private readonly EmployeeMapper mapper;
@@ -145,14 +146,18 @@ namespace myWorkes.Infrastructure.Repositories
                 }
 
                 var filterDefinitionBuilder = Builders<Employee>.Filter;
-                var filter = FilterDefinition<Employee>.Empty;
+                var filterList = new List<FilterDefinition<Employee>>();
 
                 foreach (var filterRoot in filters)
                 {
-                    filter &= filterDefinitionBuilder.Eq(filterRoot.Field, filterRoot.Value);
+                    var regexFilter = filterDefinitionBuilder.Regex(filterRoot.Field, new BsonRegularExpression(filterRoot.Value, "i")); // 'i' for case-insensitive
+                    filterList.Add(regexFilter);
                 }
 
-                var pageSize = 10; 
+                // Combine all the filters with "OR" logic
+                var filter = filterDefinitionBuilder.Or(filterList);
+
+                var pageSize = 10;
                 var employees = await _collection
                     .Find(filter)
                     .Skip((page - 1) * pageSize)
@@ -163,9 +168,10 @@ namespace myWorkes.Infrastructure.Repositories
 
                 return new ActionResult<IEnumerable<EmployeeAggregate>>(aggregate);
             }
-            catch 
+            catch (Exception ex)
             {
-                throw new Exception("We cant made this operation");
+                // Log ex.Message or ex.StackTrace as needed
+                return new ActionResult<IEnumerable<EmployeeAggregate>>(StatusCode(500, "An error occurred while processing the request."));
             }
         }
 
