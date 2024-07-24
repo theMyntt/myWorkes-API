@@ -29,7 +29,6 @@ namespace myWorkes.Infrastructure.Schema
         public required EEmployeerType Type { get; set; }
 
         [BsonElement("allowedSystems")]
-        [BsonRepresentation(BsonType.Array)]
         public List<string>? AllowedSystems { get; set; }
     }
 }
