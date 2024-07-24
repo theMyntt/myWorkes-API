@@ -6,6 +6,7 @@ namespace myWorkes.Core
 {
 	public class EntityRoot
 	{
+		[BsonId]
 		[BsonElement("_id")]
 		[BsonRepresentation(BsonType.String)]
 		public required string Id { get; set; }
