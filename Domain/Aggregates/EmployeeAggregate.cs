@@ -9,12 +9,12 @@ namespace myWorkes.Domain.Aggregates
 {
 	public class EmployeeAggregate : AggregateRoot 
 	{
-        public required string Name { get; set; }
-        public required string Email { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string? Phone { get; set; }
-        public required string Password { get; set; }
-        public required EEmployeerType Type { get; set; }
-        public required List<string>? AllowedSystems { get; set; }
+        public string Password { get; set; }
+        public EEmployeerType Type { get; set; }
+        public List<string>? AllowedSystems { get; set; }
 
         public EmployeeAggregate(string Name, string Email, string? Phone, string Password, EEmployeerType Type, List<string>? AllowedSystems)
 		{
