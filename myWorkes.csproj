@@ -27,6 +27,7 @@
     <None Remove="Domain\Enums\" />
     <None Remove="Application\UseCases\" />
     <None Remove="Application\Services\" />
+    <None Remove="Application\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
@@ -41,5 +42,6 @@
     <Folder Include="Domain\Enums\" />
     <Folder Include="Application\UseCases\" />
     <Folder Include="Application\Services\" />
+    <Folder Include="Application\Utils\" />
   </ItemGroup>
 </Project>
