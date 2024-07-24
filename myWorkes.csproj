@@ -19,11 +19,27 @@
     <None Remove="Domain\" />
     <None Remove="Application\" />
     <None Remove="Core\" />
+    <None Remove="Infrastructure\Controllers\" />
+    <None Remove="Infrastructure\Schema\" />
+    <None Remove="Infrastructure\DTOs\" />
+    <None Remove="Infrastructure\Repositories\" />
+    <None Remove="Domain\Aggregates\" />
+    <None Remove="Domain\Enums\" />
+    <None Remove="Application\UseCases\" />
+    <None Remove="Application\Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Domain\" />
     <Folder Include="Application\" />
     <Folder Include="Core\" />
+    <Folder Include="Infrastructure\Controllers\" />
+    <Folder Include="Infrastructure\Schema\" />
+    <Folder Include="Infrastructure\DTOs\" />
+    <Folder Include="Infrastructure\Repositories\" />
+    <Folder Include="Domain\Aggregates\" />
+    <Folder Include="Domain\Enums\" />
+    <Folder Include="Application\UseCases\" />
+    <Folder Include="Application\Mappers\" />
   </ItemGroup>
 </Project>
