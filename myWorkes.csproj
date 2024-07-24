@@ -26,7 +26,7 @@
     <None Remove="Domain\Aggregates\" />
     <None Remove="Domain\Enums\" />
     <None Remove="Application\UseCases\" />
-    <None Remove="Application\Mappers\" />
+    <None Remove="Application\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
@@ -40,6 +40,6 @@
     <Folder Include="Domain\Aggregates\" />
     <Folder Include="Domain\Enums\" />
     <Folder Include="Application\UseCases\" />
-    <Folder Include="Application\Mappers\" />
+    <Folder Include="Application\Services\" />
   </ItemGroup>
 </Project>
