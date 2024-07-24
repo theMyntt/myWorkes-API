@@ -1,16 +1,15 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using myWorkes.Domain.Aggregates;
 
 namespace myWorkes.Core
 {
-	public interface IRepositoryService
+	public interface IRepositoryService<Aggregate>
 	{
-		Task<ActionResult<IEnumerable<EmployeeAggregate>>> Filter(List<FiltersRoot> filters, int page);
-		Task<ActionResult<EmployeeAggregate>> Find(List<FiltersRoot> filters);
-		Task<ActionResult<StandardResponse>> Create(EmployeeAggregate employee);
-		Task<ActionResult<StandardResponse>> Edit(EmployeeAggregate employee);
-		Task<ActionResult<StandardResponse>> Delete(EmployeeAggregate employee);
+		Task<ActionResult<IEnumerable<Aggregate>>> Filter(List<FiltersRoot> filters, int page);
+		Task<ActionResult<Aggregate>> Find(List<FiltersRoot> filters);
+		Task<ActionResult<StandardResponse>> Create(Aggregate employee);
+		Task<ActionResult<StandardResponse>> Edit(Aggregate employee);
+		Task<ActionResult<StandardResponse>> Delete(Aggregate employee);
 	}
 }
 
