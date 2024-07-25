@@ -142,7 +142,12 @@ namespace myWorkes.Infrastructure.Repositories
             {
                 if (_collection == null)
                 {
-                    throw new InvalidOperationException("Collection is null");
+                    return StatusCode(500, new StandardResponse("Collection is null", 500));
+                }
+
+                if (filters[0] == null)
+                {
+                    return BadRequest("Filters is null");
                 }
 
                 var filterDefinitionBuilder = Builders<Employee>.Filter;
@@ -154,7 +159,6 @@ namespace myWorkes.Infrastructure.Repositories
                     filterList.Add(regexFilter);
                 }
 
-                // Combine all the filters with "OR" logic
                 var filter = filterDefinitionBuilder.Or(filterList);
 
                 var pageSize = 10;
@@ -168,9 +172,8 @@ namespace myWorkes.Infrastructure.Repositories
 
                 return new ActionResult<IEnumerable<EmployeeAggregate>>(aggregate);
             }
-            catch (Exception ex)
+            catch
             {
-                // Log ex.Message or ex.StackTrace as needed
                 return new ActionResult<IEnumerable<EmployeeAggregate>>(StatusCode(500, "An error occurred while processing the request."));
             }
         }
@@ -181,7 +184,7 @@ namespace myWorkes.Infrastructure.Repositories
             {
                 if (_collection == null)
                 {
-                    throw new Exception("Collection is null");
+                    return StatusCode(500, new StandardResponse("Collection is null", 500));
                 }
 
                 var filterDefinitionBuilder = Builders<Employee>.Filter;
@@ -200,7 +203,7 @@ namespace myWorkes.Infrastructure.Repositories
             }
             catch
             {
-                throw new Exception("We cant made this operation");
+                return StatusCode(500, new StandardResponse("We cant run this operation", 500));
             }
         }
     }
