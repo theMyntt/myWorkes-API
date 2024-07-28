@@ -9,7 +9,7 @@ using myWorkes.Infrastructure.DTOs;
 namespace myWorkes.Infrastructure.Controllers
 {
 	[Route("/api/employee")]
-	[Tags("Employee Management")]
+	[Tags("Employee Search")]
 	public class FilterEmployeeController : Controller, IControllerService<FilterEmployeeDTO, IEnumerable<EmployeeAggregate>>
 	{
         private readonly FilterEmployeeUseCase UseCase;
