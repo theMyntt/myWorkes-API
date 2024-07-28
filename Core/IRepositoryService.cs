@@ -7,6 +7,7 @@ namespace myWorkes.Core
 	{
 		Task<ActionResult<IEnumerable<Aggregate>>> Filter(List<FiltersRoot> filters, int page);
 		Task<ActionResult<Aggregate>> Find(List<FiltersRoot> filters);
+		Task<ActionResult<IEnumerable<Aggregate>>> Read(int page, int limit);
 		Task<ActionResult<StandardResponse>> Create(Aggregate employee);
 		Task<ActionResult<StandardResponse>> Edit(Aggregate employee);
 		Task<ActionResult<StandardResponse>> Delete(Aggregate employee);

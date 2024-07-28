@@ -206,5 +206,36 @@ namespace myWorkes.Infrastructure.Repositories
                 return StatusCode(500, new StandardResponse("We cant run this operation", 500));
             }
         }
+
+        public async Task<ActionResult<IEnumerable<EmployeeAggregate>>> Read(int page, int limit)
+        {
+            if (_collection == null)
+            {
+                return StatusCode(500, new StandardResponse("Collection is null", 500));
+            }
+
+            try
+            {
+                var pageSize = limit;
+
+                var employees = await _collection
+                    .Find(FilterDefinition<Employee>.Empty)
+                    .Skip((page - 1) * pageSize)
+                    .Limit(pageSize)
+                    .ToListAsync();
+
+                var aggregate = employees.Select(mapper.toDomain);
+
+                return new ActionResult<IEnumerable<EmployeeAggregate>>(aggregate);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new StandardResponse
+                {
+                    StatusCode = 500,
+                    Message = $"Error retrieving employees: {ex.Message}"
+                });
+            }
+        }
     }
 }
