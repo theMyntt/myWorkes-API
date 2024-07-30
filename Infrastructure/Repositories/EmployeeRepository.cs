@@ -22,6 +22,12 @@ namespace myWorkes.Infrastructure.Repositories
             mapper = new();
         }
 
+        public async Task<int> TotalCount()
+        {
+            if (_collection == null) throw new InvalidOperationException("Collection is not initialized.");
+            return (int)await _collection.CountDocumentsAsync(Builders<Employee>.Filter.Empty);
+        }
+
         public async Task<ActionResult<StandardResponse>> Create(EmployeeAggregate employee)
         {
             try
